@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html><head><title>Dashboard</title><link rel="stylesheet" href="../assets/css/style.css"></head>
+<body>
+<nav class="sidebar">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="produk.html">Produk</a>
+  <a href="kategori.html">Kategori</a>
+  <a href="order.html">Order</a>
+  <a href="banner.html">Banner</a>
+  <a href="setting.html">Setting</a>
+</nav>
+<main>
+  <h1>Dashboard</h1>
+  <div class="stats">
+    <div class="card"><p>Produk</p><h2 id="statPro">0</h2></div>
+    <div class="card"><p>Kategori</p><h2 id="statKat">0</h2></div>
+    <div class="card"><p>Order Baru</p><h2 id="statOrder">0</h2></div>
+  </div>
+</main>
+<script src="../assets/js/db.js"></script>
+<script>
+let d=DB.get(); statPro.innerText=d.produk.length; statKat.innerText=d.kategori.length; statOrder.innerText=d.order.filter(o=>o.status=='Baru').length;
+</script>
+</body></html>
