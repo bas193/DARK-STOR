@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><title>Tambah Produk</title><link rel="stylesheet" href="../assets/css/style.css"></head>
+<body>
+<nav class="sidebar">...sama...</nav>
+<main>
+  <h1>Tambah/Edit Produk</h1>
+  <input id="nama" placeholder="Nama Produk">
+  <input id="harga" placeholder="Harga">
+  <input id="stok" type="number" placeholder="Stok">
+  <select id="kategori"></select>
+  <textarea id="desc" placeholder="Deskripsi"></textarea>
+  <input id="gambar" type="file" multiple>
+  <button onclick="simpanProduk()">Simpan</button>
+</main>
+<script src="../assets/js/db.js"></script><script src="../assets/js/app.js"></script>
+<script>loadKategoriSelect()</script>
+</body></html>
