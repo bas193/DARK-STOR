@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARK STORE — Top Up Games & Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f0f1a',
+                        darker: '#080810',
+                        gold: '#ffd700',
+                        accent: '#e94560',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #0f0f1a; }
+        .tab-active { background: #ffd700; color: #000; font-weight: 700; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15); }
+        .animate-pulse-slow { animation: pulse 2s infinite; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .animate-marquee { animation: marquee 15s linear infinite; }
+    </style>
+</head>
+<body class="bg-dark text-white min-h-screen">
+
+    <!-- NAVBAR -->
+    <nav class="bg-darker border-b border-gray-800 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <span class="text-2xl">💎</span>
+                <span class="text-2xl font-black text-gold">DARK STORE</span>
+            </a>
+            <a href="admin.html" class="text-gray-400 hover:text-gold transition text-sm">
+                <i class="fas fa-cog mr-1"></i> Admin
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="py-16 px-4 text-center">
+        <div class="container mx-auto">
+            <h1 class="text-[clamp(2rem,6vw,4rem)] font-black mb-4">
+                <span class="text-gold">TOP UP GAMES</span> & SERVICES
+            </h1>
+            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                Cepat • Selamat • Dipercayai<br>
+                Proses hanya 1-5 minit! ⚡
+            </p>
+        </div>
+    </section>
+
+    <!-- ANNOUNCEMENT -->
+    <div class="bg-accent/20 border-y border-accent/50 py-2 overflow-hidden">
+        <div class="whitespace-nowrap">
+            <span class="animate-marquee inline-block text-accent font-semibold">
+                🔥 PROMOSI: Semua Produk Siap Stok! Proses Segera 1-5 Minit! WhatsApp: +60194939829 🔥
+            </span>
+        </div>
+    </div>
+
+    <!-- FILTER TABS -->
+    <section class="py-8 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="categoryTabs">
+                <button data-cat="all" class="tab-active px-6 py-2 rounded-full border border-gold text-gold transition">
+                    Semua
+                </button>
+                <button data-cat="Free Fire" class="px-6 py-2 rounded-full border border-gray-600 text-gray-400 hover:border-gold hover:text-gold transition">
+                    Free Fire
+                </button>
+                <button data-cat="Mobile Legends" class="px-6 py-2 rounded-full border border-gray-600 text-gray-400 hover:border-gold hover:text-gold transition">
+                    Mobile Legends
+                </button>
+                <button data-cat="Boost Service" class="px-6 py-2 rounded-full border border-gray-600 text-gray-400 hover:border-gold hover:text-gold transition">
+                    Boost Service
+                </button>
+            </div>
+
+            <!-- PRODUCTS GRID -->
+            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Products load here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-darker border-t border-gray-800 py-10 mt-20">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gold font-bold text-xl mb-4">💎 DARK STORE OFFICIAL</p>
+            <p class="text-gray-500 mb-4">Hubungi Kami untuk Pesanan & Soalan</p>
+            <a href="https://wa.me/60194939829" target="_blank" 
+               class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 px-6 py-3 rounded-full font-bold transition mb-6">
+                <i class="fab fa-whatsapp"></i> WhatsApp: +60194939829
+            </a>
+            <p class="text-gray-600 text-sm">&copy; 2026 DARK STORE. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ========== DATA DEFAULT ==========
+        const DEFAULT_CATEGORIES = [
+            { id: 1, name: 'Free Fire' },
+            { id: 2, name: 'Mobile Legends' },
+            { id: 3, name: 'Boost Service' }
+        ];
+
+        const DEFAULT_PRODUCTS = [
+            { id: 1, category: 'Free Fire', name: '50 Diamond FF', price: 'Rp 10.000', desc: 'Proses 1-5 Minit', image: '💎' },
+            { id: 2, category: 'Free Fire', name: '140 Diamond FF', price: 'Rp 25.000', desc: 'Proses 1-5 Minit', image: '💎' },
+            { id: 3, category: 'Free Fire', name: '355 Diamond FF', price: 'Rp 60.000', desc: 'Proses 1-5 Minit', image: '💎' },
+            { id: 4, category: 'Mobile Legends', name: '86 Diamonds ML', price: 'Rp 20.000', desc: 'Proses 1-5 Minit', image: '💎' },
+            { id: 5, category: 'Mobile Legends', name: '172 Diamonds ML', price: 'Rp 40.000', desc: 'Proses 1-5 Minit', image: '💎' },
+            { id: 6, category: 'Boost Service', name: 'Joki Rank ML Mythic Glory', price: 'Hubungi WA', desc: 'Sila chat untuk harga', image: '🏆' }
+        ];
+
+        // ========== LOAD DATA ==========
+        let categories = JSON.parse(localStorage.getItem('ds_categories')) || DEFAULT_CATEGORIES;
+        let products = JSON.parse(localStorage.getItem('ds_products')) || DEFAULT_PRODUCTS;
+        let activeCategory = 'all';
+
+        // Save data
+        function saveData() {
+            localStorage.setItem('ds_categories', JSON.stringify(categories));
+            localStorage.setItem('ds_products', JSON.stringify(products));
+        }
+
+        // Render products
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            
+            let filtered = activeCategory === 'all' 
+                ? products 
+                : products.filter(p => p.category === activeCategory);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500">Tiada produk dalam kategori ini</div>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-darker rounded-xl border border-gray-800 p-6 product-card transition-all duration-300">
+                        <div class="text-5xl text-center mb-4">${p.image || '💎'}</div>
+                        <span class="text-xs text-gold/70 font-semibold">${p.category}</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-2">${p.name}</h3>
+                        <p class="text-gold text-2xl font-black mb-1">${p.price}</p>
+                        <p class="text-gray-500 text-sm mb-5">${p.desc}</p>
+                        <button onclick="orderWA('${p.name}', '${p.price}')" 
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition">
+                            <i class="fab fa-whatsapp mr-2"></i> ORDER VIA WA
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // Order via WhatsApp
+        function orderWA(name, price) {
+            const msg = `Hai Admin DARK STORE! 👋\n\nSaya nak order:\n📦 Produk: ${name}\n💰 Harga: ${price}\n\nBoleh proses segera? Terima kasih! 😊`;
+            window.open(`https://wa.me/60194939829?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // Category tabs
+        document.getElementById('categoryTabs').addEventListener('click', e => {
+            if (e.target.tagName === 'BUTTON') {
+                // Update tabs style
+                document.querySelectorAll('#categoryTabs button').forEach(btn => {
+                    btn.classList.remove('tab-active', 'border-gold', 'text-gold');
+                    btn.classList.add('border-gray-600', 'text-gray-400');
+                });
+                e.target.classList.add('tab-active');
+                e.target.classList.remove('border-gray-600', 'text-gray-400');
+                
+                activeCategory = e.target.dataset.cat;
+                renderProducts();
+            }
+        });
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+        });
+    </script>
+</body>
+  </html>
+  
