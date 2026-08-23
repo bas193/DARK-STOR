@@ -1,0 +1,16 @@
+body{background:#0a0a0a; color:#fff; font-family:Arial; margin:0;}
+header{background:#111; padding:10px; display:flex; gap:10px;}
+#search{flex:1; padding:8px; background:#000; border:0; color:#fff;}
+.btn{background:#FFC107; color:#000; padding:8px 15px; border-radius:5px; text-decoration:none;}
+.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; padding:10px;}
+.card-produk{background:#111; padding:10px; border-radius:10px;}
+.card-produk img{width:100%; border-radius:8px;}
+.sidebar{width:200px; background:#111; height:100vh; position:fixed; padding:10px;}
+.sidebar a{display:block; color:#fff; padding:10px; text-decoration:none;}
+main{margin-left:210px; padding:20px;}
+.stats{display:flex; gap:10px;}
+.stats.card{background:#111; padding:20px; flex:1; text-align:center;}
+.login{display:flex; justify-content:center; align-items:center; height:100vh;}
+.box{background:#111; padding:30px; border-radius:10px;}
+input,select,textarea{width:100%; padding:10px; margin:5px 0; background:#000; border:0; color:#fff; border-radius:5px;}
+table{width:100%; border-collapse:collapse;} td,th{padding:8px; border-bottom:1px solid #222;}
