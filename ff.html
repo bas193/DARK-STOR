@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Free Fire — TOPUP STORE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="logo" style="font-size:18px"><i class="fa-solid fa-gem"></i> TOPUP STORE</div>
+        <div></div>
+    </header>
+
+    <div class="container">
+        <!-- STEP 1: PLAYER ID -->
+        <div class="step-card" id="step1">
+            <div class="step-title">
+                <span class="step-num">1</span>
+                <h2>Masukkan Player ID</h2>
+            </div>
+            <input type="text" id="playerId" placeholder="Masukkan Player ID Anda" oninput="cekPlayerID(this.value)">
+            <p class="id-hint">ID tercantum di bawah nama karakter Anda</p>
+            <div id="playerName" class="player-name" style="display:none"></div>
+        </div>
+
+        <!-- STEP 2: PILIH NOMINAL -->
+        <div class="step-card" id="step2">
+            <div class="step-title">
+                <span class="step-num">2</span>
+                <h2>Pilih Nominal Top Up</h2>
+            </div>
+
+            <h3 class="section-label">🔥 Best Seller</h3>
+            <div class="product-grid" id="bestSeller"></div>
+
+            <h3 class="section-label">📦 Jelajahi semua barang</h3>
+            <div class="product-grid" id="allProducts"></div>
+        </div>
+
+        <!-- STEP 3: PILIH PEMBAYARAN -->
+        <div class="step-card" id="step3" style="display:none">
+            <div class="step-title">
+                <span class="step-num">3</span>
+                <h2>Pilih Pembayaran</h2>
+            </div>
+
+            <label class="toggle-container">
+                <span>Gunakan Rewards</span>
+                <input type="checkbox" id="useRewards">
+                <span class="toggle-slider"></span>
+            </label>
+
+            <div class="payment-methods" id="paymentMethods">
+                <div class="payment-card" onclick="pilihBayar('DANA', 1802)">
+                    <img src="https://img.icons8.com/color/48/000000/dana.png" alt="DANA">
+                    <span>DANA</span>
+                    <span class="pay-price">Rp 1.802</span>
+                </div>
+                <div class="payment-card" onclick="pilihBayar('GoPay', 1802)">
+                    <img src="https://img.icons8.com/color/48/000000/gopay.png" alt="GoPay">
+                    <span>GoPay</span>
+                    <span class="pay-price">Rp 1.802</span>
+                </div>
+                <div class="payment-card" onclick="pilihBayar('QRIS', 1802)">
+                    <img src="https://img.icons8.com/color/48/000000/qris.png" alt="QRIS">
+                    <span>QRIS</span>
+                    <span class="pay-price">Rp 1.802</span>
+                </div>
+                <div class="payment-card" onclick="pilihBayar('Bank Transfer', 1802)">
+                    <i class="fa-solid fa-university fa-2x"></i>
+                    <span>Bank Transfer</span>
+                    <span class="pay-price">Rp 1.802</span>
+                </div>
+                <div class="payment-card" onclick="pilihBayar('Indomaret', 1802)">
+                    <img src="https://img.icons8.com/color/48/000000/store.png" alt="Indomaret">
+                    <span>Indomaret</span>
+                    <span class="pay-price">Rp 1.802</span>
+                </div>
+                <div class="payment-card" onclick="pilihBayar('Alfamart', 1802)">
+                    <img src="https://img.icons8.com/color/48/000000/alfamart.png" alt="Alfamart">
+                    <span>Alfamart</span>
+                    <span class="pay-price">Rp 1.802</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: DETAIL PEMBELIAN -->
+        <div class="step-card" id="step4" style="display:none">
+            <div class="step-title">
+                <span class="step-num">4</span>
+                <h2>Detail Pembelian</h2>
+            </div>
+
+            <div class="detail-row">
+                <span>Produk</span>
+                <span id="detailProduct">-</span>
+            </div>
+            <div class="detail-row">
+                <span>Player ID</span>
+                <span id="detailId">-</span>
+            </div>
+            <div class="detail-row">
+                <span>Metode Bayar</span>
+                <span id="detailMethod">-</span>
+            </div>
+            <div class="detail-row">
+                <span>Harga</span>
+                <span id="detailPrice">-</span>
+            </div>
+            <div class="detail-row">
+                <span>Pajak 11%</span>
+                <span id="detailTax">-</span>
+            </div>
+            <div class="detail-row total-row">
+                <span>Total</span>
+                <span id="detailTotal">-</span>
+            </div>
+
+            <div class="form-group" style="margin-top:20px">
+                <label>Email (untuk kirim bukti pembayaran)</label>
+                <input type="email" id="buyerEmail" placeholder="email@contoh.com">
+            </div>
+
+            <label class="checkbox-container">
+                <input type="checkbox" id="agreePromo">
+                <span>Saya setuju untuk menerima promo & penawaran spesial</span>
+            </label>
+
+            <button class="buy-btn" onclick="showPopup()">Beli Sekarang</button>
+        </div>
+    </div>
+
+    <!-- BOTTOM BAR PILIHAN -->
+    <div class="bottom-bar" id="bottomBar" style="display:none">
+        <span id="selectedInfo">Belum memilih</span>
+        <button class="continue-btn" onclick="lanjutKePembayaran()" disabled>Lanjutkan</button>
+    </div>
+
+    <!-- POPUP DETAIL PESANAN -->
+    <div class="popup-overlay" id="popupOverlay" style="display:none" onclick="tutupPopup()"></div>
+    <div class="popup" id="popup" style="display:none">
+        <h2 class="popup-title">📋 Detail Pesanan</h2>
+        <div class="popup-detail">
+            <div class="popup-row"><span>Nickname:</span><span id="popNickname">-</span></div>
+            <div class="popup-row"><span>Player ID:</span><span id="popId">-</span></div>
+            <div class="popup-row"><span>Produk:</span><span id="popProduct">-</span></div>
+            <div class="popup-row"><span>Bayar dengan:</span><span id="popMethod">-</span></div>
+            <div class="popup-row"><span>Harga:</span><span id="popPrice">-</span></div>
+            <div class="popup-row"><span>Pajak 11%:</span><span id="popTax">-</span></div>
+            <div class="popup-row popup-total"><span>Total:</span><span id="popTotal">-</span></div>
+        </div>
+        <div class="popup-buttons">
+            <button class="btn-cancel" onclick="tutupPopup()">Batal</button>
+            <button class="btn-confirm" onclick="konfirmPesanan()">✅ Konfirm</button>
+        </div>
+    </div>
+
+    <!-- LOADING POPUP -->
+    <div class="popup-overlay" id="loadingOverlay" style="display:none">
+        <div class="popup" style="text-align:center;padding:40px 20px">
+            <div class="loading-spinner"></div>
+            <h2 style="margin-top:20px;color:var(--gold)">Memproses Pembayaran...</h2>
+            <p style="color:var(--text-gray);margin-top:10px">Mohon tunggu sebentar</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+              </html>
+  
