@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARK STORE OFFICIAL | Top Up Games & Digital Services</title>
+    <meta name="description" content="Dark Store — Top Up Diamond Free Fire, Mobile Legends, Boost Services & More. Fast & Trusted!">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a1a2e',
+                        secondary: '#16213e',
+                        accent: '#e94560',
+                        gold: '#ffd700',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .gradient-text {
+                background: linear-gradient(90deg, #ffd700, #e94560);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(233, 69, 96, 0.2);
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            @keyframes marquee {
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+            }
+            .animate-marquee {
+                animation: marquee 20s linear infinite;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-secondary text-gray-800 dark:text-gray-200 min-h-screen flex flex-col">
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav id="navbar" class="bg-primary text-white shadow-lg sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center gap-2">
+                    <span class="text-2xl font-bold text-gold">💎 DARK STORE</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#home" class="hover:text-gold transition">Home</a>
+                    <a href="#catalog" class="hover:text-gold transition">Katalog</a>
+                    <a href="#howto" class="hover:text-gold transition">Cara Order</a>
+                    <a href="#contact" class="hover:text-gold transition">Hubungi Kami</a>
+                    <button onclick="openAdminPanel()" class="bg-accent hover:bg-accent/80 px-4 py-2 rounded-lg transition">
+                        <i class="fa fa-cog mr-1"></i> Admin
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden mt-3 pb-3 space-y-3">
+                <a href="#home" class="block py-2 hover:text-gold">Home</a>
+                <a href="#catalog" class="block py-2 hover:text-gold">Katalog</a>
+                <a href="#howto" class="block py-2 hover:text-gold">Cara Order</a>
+                <a href="#contact" class="block py-2 hover:text-gold">Hubungi Kami</a>
+                <button onclick="openAdminPanel()" class="w-full bg-accent hover:bg-accent/80 px-4 py-2 rounded-lg transition">
+                    <i class="fa fa-cog mr-1"></i> Admin Panel
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="home" class="bg-gradient-to-br from-primary to-secondary text-white py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="md:w-1/2 space-y-6">
+                    <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight">
+                        Selamat Datang Ke<br>
+                        <span class="text-gold">DARK STORE OFFICIAL</span>
+                    </h1>
+                    <p class="text-lg text-gray-300">Top Up Diamond Free Fire • Mobile Legends • Boost Services • Promoter — Cepat, Murah & Dipercayai!</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#catalog" class="bg-gold text-primary font-bold px-8 py-3 rounded-full hover:bg-yellow-400 transition shadow-lg">
+                            🛍️ BELI SEKARANG
+                        </a>
+                        <a href="https://wa.me/60194939829" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-3 rounded-full transition shadow-lg">
+                            <i class="fa fa-whatsapp mr-2"></i> CHAT KAMI
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://i.imgur.com/8ZQfZLd.png" alt="Dark Store" class="w-full max-w-md rounded-2xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ANNOUNCEMENT ==================== -->
+    <section class="bg-accent text-white py-3 overflow-hidden">
+        <div class="whitespace-nowrap">
+            <p class="animate-marquee">🔥 PROMOSI: Harga Terkini — Semua Servis Ada! WhatsApp: +60194939829 | Telegram: @Draksales 🔥</p>
+        </div>
+    </section>
+
+    <!-- ==================== CATALOG SECTION ==================== -->
+    <section id="catalog" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold">📦 KATALOG PRODUK</h2>
+                <p class="text-gray-500 mt-2">Pilih kategori dan produk yang anda mahu</p>
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="mb-8 space-y-4">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <input type="text" id="searchInput" placeholder="🔍 Cari produk..." 
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-secondary">
+                    </div>
+                    <div>
+                        <select id="categoryFilter" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-secondary">
+                            <option value="all">Semua Kategori</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Products will load here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW TO ORDER ==================== -->
+    <section id="howto" class="py-16 bg-gray-50 dark:bg-gray-900/50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold">📋 CARA ORDER</h2>
+                <p class="text-gray-500 mt-2">4 langkah mudah sahaja</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="bg-white dark:bg-secondary p-6 rounded-xl shadow-md text-center card-hover">
+                    <div class="w-16 h-16 bg-accent/10 text-accent rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+                    <h3 class="text-xl font-bold mb-2">Pilih Produk</h3>
+                    <p class="text-gray-500">Pilih produk & kuantiti yang anda mahu</p>
+                </div>
+                <div class="bg-white dark:bg-secondary p-6 rounded-xl shadow-md text-center card-hover">
+                    <div class="w-16 h-16 bg-accent/10 text-accent rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+                    <h3 class="text-xl font-bold mb-2">Klik Order</h3>
+                    <p class="text-gray-500">Tekan butang "ORDER SEKARANG"</p>
+                </div>
+                <div class="bg-white dark:bg-secondary p-6 rounded-xl shadow-md text-center card-hover">
+                    <div class="w-16 h-16 bg-accent/10 text-accent rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+                    <h3 class="text-xl font-bold mb-2">Hantar ke WhatsApp</h3>
+                    <p class="text-gray-500">Sahkan pesanan & buat pembayaran</p>
+                </div>
+                <div class="bg-white dark:bg-secondary p-6 rounded-xl shadow-md text-center card-hover">
+                    <div class="w-16 h-16 bg-accent/10 text-accent rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
+                    <h3 class="text-xl font-bold mb-2">Selesai ✅</h3>
+                    <p class="text-gray-500">Proses segera — Terima dalam masa!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold">📞 HUBUNGI KAMI</h2>
+                <p class="text-gray-500 mt-2">Ada soalan? Jangan malu tanya!</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto bg-white dark:bg-secondary rounded-2xl shadow-xl p-8">
+                <div class="space-y-6 text-center">
+                    <div class="flex items-center justify-center gap-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-xl">
+                        <i class="fa fa-whatsapp text-3xl text-green-500"></i>
+                        <div class="text-left">
+                            <h3 class="font-bold text-lg">WhatsApp</h3>
+                            <a href="https://wa.me/60194939829" target="_blank" class="text-green-600 dark:text-green-400">+60194939829</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                        <i class="fa fa-telegram text-3xl text-blue-500"></i>
+                        <div class="text-left">
+                            <h3 class="font-bold text-lg">Telegram</h3>
+                            <a href="https://t.me/Draksales" target="_blank" class="text-blue-600 dark:text-blue-400">@Draksales</a>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <a href="https://wa.me/60194939829?text=Hai!%20Saya%20nak%20bertanya%20tentang%20produk%20anda." 
+                           target="_blank"
+                           class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold px-8 py-4 rounded-full text-lg transition shadow-lg">
+                            <i class="fa fa-whatsapp mr-2"></i> CHAT SEKARANG
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-primary text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-gold mb-4">💎 DARK STORE</h3>
+                    <p class="text-gray-400">Kedai digital anda untuk top up games & servis promosi. Cepat, selamat & dipercayai.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Pautan Pantas</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#home" class="hover:text-gold">Home</a></li>
+                        <li><a href="#catalog" class="hover:text-gold">Katalog</a></li>
+                        <li><a href="#howto" class="hover:text-gold">Cara Order</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Perkhidmatan</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Top Up Free Fire</li>
+                        <li>Top Up Mobile Legends</li>
+                        <li>Boost Services</li>
+                        <li>Promoter Bot</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Hubungi Kami</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fa fa-whatsapp mr-2"></i> +60194939829</li>
+                        <li><i class="fa fa-telegram mr-2"></i> @Draksales</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2026 DARK STORE OFFICIAL. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== PRODUCT DETAIL MODAL ==================== -->
+    <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative bg-white dark:bg-secondary rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl">
+                &times;
+            </button>
+            <div id="modalContent" class="p-6">
+                <!-- Content loads here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ADMIN LOGIN MODAL ==================== -->
+    <div id="adminLoginModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeAdminLogin()"></div>
+        <div class="relative bg-white dark:bg-secondary rounded-2xl shadow-2xl w-full max-w-md p-8">
+            <button onclick="closeAdminLogin()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl">
+                &times;
+            </button>
+            <h2 class="text-2xl font-bold text-center mb-6">🔐 ADMIN LOGIN</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block font-semibold mb-2">Username</label>
+                    <input type="text" id="adminUser" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800" placeholder="Masukkan username">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-2">Password</label>
+                    <input type="password" id="adminPass" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-gray-800" placeholder="Masukkan password">
+                </div>
+                <button onclick="adminLogin()" class="w-full bg-accent hover:bg-accent/80 text-white font-bold py-3 rounded-lg transition">
+                    LOGIN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ADMIN PANEL ==================== -->
+    <div id="adminPanel" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="relative h-full flex">
+            <!-- Sidebar -->
+            <div class="w-64 bg-primary text-white h-full overflow-y-auto">
+                <div class="p-4 border-b border-gray-700">
+                    <h2 class="text-xl font-bold text-gold">⚙️ ADMIN PANEL</h2>
+                    <p class="text-sm text-gray-400 mt-1">Dark Store Official</p>
+                </div>
+                <nav class="p-4 space-y-2">
+                    <button onclick="showAdminTab('products')" class="admin-tab w-full text-left px-4 py-2 rounded bg-accent/20 hover:bg-accent/40 transition" data-tab="products">
+                        📦 Produk
+                    </button>
+                    <button onclick="showAdminTab('categories')" class="admin-tab w-full text-left px-4 py-2 rounded hover:bg-accent/20 transition" data-tab="categories">
+                        📂 Kategori
+                    </button>
+                    <button onclick="showAdminTab('settings')" class="admin-tab w-full text-left px-4 py-2 rounded hover:bg-accent/20 transition" data-tab="settings">
+                        ⚙️ Tetapan
+                    </button>
+                    <hr class="border-gray-700 my-4">
+                    <button onclick="logoutAdmin()" class="w-full text-left px-4 py-2 rounded text-red-400 hover:bg-red-500/20 transition">
+                        🚪 Logout
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Content Area -->
+            <div class="flex-1 bg-gray-100 dark:bg-gray-900 h-full overflow-y-auto p-6">
+                <button onclick="closeAdminPanel()" class="absolute top-4 right-4 bg-red-500 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 z-10">
+                    &times;
+                </button>
+
+                <!-- Products Tab -->
+                <div id="tab-products" class="admin-content">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">📦 Urus Produk</h2>
+                        <button onclick="showAddProductForm()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition">
+                            ➕ Tambah Produk
+                        </button>
+                    </div>
+                    <div id="adminProductsList" class="space-y-4">
+                        <!-- Products list -->
+                    </div>
+                </div>
+
+                <!-- Categories Tab -->
+                <div id="tab-categories" class="admin-content hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">📂 Urus Kategori</h2>
+                        <button onclick="showAddCategoryForm()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition">
+                            ➕ Tambah Kategori
+                        </button>
+                    </div>
+                    <div id="adminCategoriesList" class="space-y-4">
+                        <!-- Categories list -->
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="tab-settings" class="admin-content hidden">
+                    <h2 class="text-2xl font-bold mb-6">⚙️ Tetapan Kedai</h2>
+                    <div class="bg-white dark:bg-secondary rounded-xl p-6 space-y-6">
+                        <div>
+                            <label c
