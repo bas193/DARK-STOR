@@ -1,0 +1,294 @@
+:root {
+    --bg: #0D1117;
+    --card: #161B22;
+    --gold: #FFC107;
+    --orange: #FF4500;
+    --green: #22C55E;
+    --red: #F43F5E;
+    --text: #FFFFFF;
+    --gray: #8B949E;
+    --border: #30363D;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 90px;
+}
+
+a { text-decoration: none; color: inherit; }
+button { border: none; cursor: pointer; font-weight: 600; transition: all 0.2s ease; }
+input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+}
+input:focus { border-color: var(--gold); }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--gold);
+}
+
+.logo i { font-size: 26px; }
+.back-btn { font-size: 20px; color: var(--text); background: none; }
+.admin-link { font-size: 20px; color: var(--gray); }
+
+.banner {
+    padding: 40px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #161B22 0%, #0D1117 100%);
+    border-bottom: 1px solid var(--border);
+}
+
+.banner h1 { font-size: 28px; font-weight: 800; margin-bottom: 12px; line-height: 1.3; }
+.banner h1 span { color: var(--gold); }
+.banner p { font-size: 15px; color: var(--gray); }
+
+.game-section { padding: 30px 20px; }
+.game-section h2 { font-size: 22px; margin-bottom: 20px; }
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+.game-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 24px 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+.game-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.game-card img { width: 60px; height: 60px; object-fit: contain; margin-bottom: 12px; }
+.game-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.game-card p { font-size: 13px; color: var(--gray); }
+
+.container { padding: 20px; max-width: 500px; margin: 0 auto; }
+.step-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+}
+.step-title { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.step-num {
+    width: 32px; height: 32px; line-height: 32px; text-align: center;
+    background: var(--gold); color: #000; border-radius: 50%; font-weight: 800; font-size: 16px;
+}
+.step-card h2 { font-size: 18px; font-weight: 700; }
+.id-hint { font-size: 13px; color: var(--gray); margin-top: 8px; }
+.player-name {
+    margin-top: 12px; padding: 10px 14px; background: rgba(34,197,94,0.1);
+    border-radius: 8px; color: var(--green); font-weight: 600;
+}
+
+.section-label {
+    font-size: 15px; font-weight: 700; margin: 24px 0 12px; color: var(--gold);
+}
+.product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.product-card {
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.product-card:hover, .product-card.selected {
+    border-color: var(--gold); background: rgba(255,193,7,0.05);
+}
+.product-card img { width: 40px; height: 40px; object-fit: contain; margin-bottom: 8px; }
+.product-amount { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.product-original { font-size: 11px; color: var(--gray); text-decoration: line-through; }
+.product-price { font-size: 16px; font-weight: 800; color: var(--gold); margin: 4px 0; }
+.product-discount {
+    display: inline-block; background: var(--red); color: white;
+    font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-bottom: 4px;
+}
+.product-rewards { font-size: 11px; color: var(--green); }
+
+.toggle-container {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; background: var(--bg); border-radius: 10px; margin-bottom: 20px;
+}
+.toggle-container input { display: none; }
+.toggle-slider {
+    position: relative; width: 48px; height: 24px; background: var(--border); border-radius: 24px; transition: all 0.3s ease;
+}
+.toggle-container input:checked + .toggle-slider { background: var(--gold); }
+.toggle-slider::after {
+    content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
+    background: white; border-radius: 50%; transition: all 0.3s ease;
+}
+.toggle-container input:checked + .toggle-slider::after { transform: translateX(24px); }
+
+.payment-methods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.payment-card {
+    background: var(--bg); border: 2px solid var(--border); border-radius: 10px;
+    padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.2s ease;
+}
+.payment-card:hover, .payment-card.selected { border-color: var(--gold); }
+.payment-card img { width: 32px; height: 32px; object-fit: contain; margin-bottom: 6px; }
+.payment-card i { color: var(--gray); margin-bottom: 6px; }
+.payment-card span { display: block; font-size: 13px; font-weight: 600; }
+.pay-price { font-size: 11px !important; color: var(--gold) !important; margin-top: 4px; }
+
+.detail-row {
+    display: flex; justify-content: space-between; padding: 10px 0;
+    border-bottom: 1px solid var(--border); font-size: 14px;
+}
+.total-row { border-bottom: none; padding-top: 14px; font-size: 16px; font-weight: 800; color: var(--gold); }
+
+.form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
+.checkbox-container {
+    display: flex; align-items: flex-start; gap: 10px; margin: 16px 0; font-size: 13px; color: var(--gray);
+}
+.checkbox-container input { width: auto; margin-top: 2px; }
+
+.buy-btn {
+    width: 100%; padding: 16px; background: var(--orange); color: white;
+    font-size: 17px; font-weight: 800; border-radius: 10px; margin-top: 10px;
+}
+.buy-btn:hover { background: #E03E00; transform: scale(1.01); }
+
+.bottom-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--card); border-top: 1px solid var(--border);
+    padding: 14px 20px; display: flex; justify-content: space-between; align-items: center;
+    z-index: 99;
+}
+.bottom-bar span { font-weight: 600; font-size: 14px; }
+.continue-btn {
+    padding: 10px 24px; background: var(--gold); color: #000; font-weight: 800; border-radius: 8px;
+}
+.continue-btn:disabled { background: var(--border); color: var(--gray); cursor: not-allowed; }
+
+.popup-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.8); z-index: 999; display: flex; align-items: center; justify-content: center;
+}
+.popup {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 28px; width: 90%; max-width: 400px; z-index: 1000;
+}
+.popup-title { text-align: center; margin-bottom: 20px; color: var(--gold); font-size: 20px; }
+.popup-detail { margin-bottom: 24px; }
+.popup-row {
+    display: flex; justify-content: space-between; padding: 8px 0;
+    border-bottom: 1px solid var(--border); font-size: 14px;
+}
+.popup-total { border-bottom: none; padding-top: 12px; font-weight: 800; color: var(--gold); font-size: 16px; }
+.popup-buttons { display: flex; gap: 12px; margin-top: 20px; }
+.btn-cancel { flex:1; padding: 12px; background: var(--border); color: white; border-radius: 8px; font-weight: 600; }
+.btn-confirm { flex:1; padding: 12px; background: var(--green); color: white; border-radius: 8px; font-weight: 700; }
+
+.loading-spinner {
+    width: 50px; height: 50px; border: 4px solid var(--border);
+    border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+footer { text-align: center; padding: 30px 20px; color: var(--gray); font-size: 13px; }
+
+/* Admin Panel Styles */
+.admin-body { min-height: 100vh; display: flex; flex-direction: column; }
+.admin-login-wrap { flex:1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.admin-login-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px; width: 100%; max-width: 380px; text-align: center;
+}
+.admin-login-card h2 { color: var(--gold); margin-bottom: 24px; font-size: 24px; }
+.admin-login-card h2 i { margin-right: 10px; }
+.admin-login-card .form-group { margin-bottom: 16px; text-align: left; }
+.admin-login-card label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; }
+.admin-login-card button {
+    width: 100%; padding: 14px; background: var(--gold); color: #000;
+    font-size: 16px; font-weight: 800; border-radius: 10px; margin-top: 8px;
+}
+.admin-login-card .back-link { display: inline-block; margin-top: 16px; color: var(--gray); font-size: 13px; }
+
+.admin-layout { display: flex; min-height: 100vh; }
+.admin-sidebar {
+    width: 240px; background: var(--card); border-right: 1px solid var(--border);
+    position: fixed; height: 100vh; overflow-y: auto; padding: 20px 0;
+}
+.admin-sidebar .logo { padding: 0 20px 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; font-size: 18px; }
+.admin-sidebar nav a {
+    display: flex; align-items: center; gap: 10px; padding: 12px 20px;
+    color: var(--gray); font-weight: 500; border-left: 3px solid transparent; font-size: 14px;
+}
+.admin-sidebar nav a:hover, .admin-sidebar nav a.active {
+    background: rgba(255,193,7,0.1); color: var(--gold); border-left-color: var(--gold);
+}
+.admin-content { margin-left: 240px; flex: 1; padding: 24px; background: var(--bg); }
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+.admin-header h1 { font-size: 24px; }
+
+.btn { padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; }
+.btn-gold { background: var(--gold); color: #000; }
+.btn-red { background: var(--red); color: white; }
+.btn-green { background: var(--green); color: white; }
+.btn-gray { background: var(--border); color: white; }
+.btn-sm { padding: 6px 12px; font-size: 13px; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.stat-card h3 { font-size: 28px; font-weight: 900; color: var(--gold); }
+.stat-card p { color: var(--gray); margin-top: 6px; font-size: 14px; }
+
+.form-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; max-width: 500px; }
+.form-card h3 { margin-bottom: 20px; font-size: 18px; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
+
+.table-wrapper { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+th { background: var(--card); color: var(--gold); font-weight: 700; }
+tr:hover { background: rgba(48,54,61,0.5); }
+
+.empty-state { text-align: center; padding: 40px 20px; color: var(--gray); }
+.empty-state i { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+
+@media (max-width: 768px) {
+    .game-grid { grid-template-columns: repeat(2, 1fr); }
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .payment-methods { grid-template-columns: repeat(2, 1fr); }
+    .admin-sidebar { width: 100%; position: relative; height: auto; }
+    .admin-content { margin-left: 0; padding: 16px; }
+    .stats-grid { grid-template-columns: 1fr; }
+  }
+         
