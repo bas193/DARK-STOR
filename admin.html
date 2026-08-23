@@ -14,7 +14,6 @@
                         dark: '#0f0f1a',
                         darker: '#080810',
                         gold: '#ffd700',
-                        accent: '#e94560',
                     }
                 }
             }
@@ -24,22 +23,26 @@
         body { font-family: 'Inter', sans-serif; background: #0f0f1a; }
         .tab-active { background: #ffd700; color: #000; font-weight: 700; }
         .modal-backdrop { background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
+        input, select { background: #080810; border: 1px solid #374151; color: white; }
+        input:focus, select:focus { border-color: #ffd700; outline: none; }
     </style>
 </head>
 <body class="bg-dark text-white min-h-screen">
 
-    <!-- LOGIN SCREEN -->
+    <!-- ====================================== -->
+    <!-- 🔐 LOGIN SCREEN (TIDAK DIUBAH)        -->
+    <!-- ====================================== -->
     <div id="loginScreen" class="fixed inset-0 flex items-center justify-center z-50 modal-backdrop">
         <div class="bg-darker rounded-2xl p-8 w-full max-w-md border border-gray-800">
             <h2 class="text-2xl font-bold text-center mb-6 text-gold">🔐 ADMIN LOGIN</h2>
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold mb-2">Username</label>
-                    <input type="text" id="username" class="w-full px-4 py-3 rounded-lg bg-dark border border-gray-700 focus:border-gold outline-none" placeholder="Masukkan username">
+                    <input type="text" id="username" class="w-full px-4 py-3 rounded-lg border focus:border-gold outline-none" placeholder="Masukkan username">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold mb-2">Password</label>
-                    <input type="password" id="password" class="w-full px-4 py-3 rounded-lg bg-dark border border-gray-700 focus:border-gold outline-none" placeholder="Masukkan password">
+                    <input type="password" id="password" class="w-full px-4 py-3 rounded-lg border focus:border-gold outline-none" placeholder="Masukkan password">
                 </div>
                 <button onclick="login()" class="w-full bg-gold text-black font-bold py-3 rounded-lg hover:bg-yellow-400 transition">
                     LOGIN
@@ -49,11 +52,13 @@
         </div>
     </div>
 
-    <!-- ADMIN PANEL (HIDDEN UNTIL LOGIN) -->
-    <div id="adminPanel" class="hidden">
+    <!-- ====================================== -->
+    <!-- 📊 DASHBOARD (BARU DITAMBAH)          -->
+    <!-- ====================================== -->
+    <div id="dashboard" class="hidden">
         <!-- NAVBAR -->
-        <nav class="bg-darker border-b border-gray-800 px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-gold">⚙️ ADMIN PANEL — DARK STORE</h1>
+        <nav class="bg-darker border-b border-gray-800 px-6 py-4 flex justify-between items-center sticky top-0 z-40">
+            <h1 class="text-xl font-bold text-gold">⚙️ ADMIN DASHBOARD — DARK STORE</h1>
             <div class="flex gap-4 items-center">
                 <a href="index.html" target="_blank" class="text-gray-400 hover:text-gold transition">
                     <i class="fas fa-external-link-alt mr-1"></i> Lihat Kedai
@@ -64,159 +69,220 @@
             </div>
         </nav>
 
-        <div class="container mx-auto px-4 py-6">
-            <!-- TABS -->
+        <div class="container mx-auto px-4 py-6 max-w-6xl">
+            <!-- TABS NAVIGATION -->
             <div class="flex flex-wrap gap-2 mb-8">
-                <button data-tab="products" class="tab-active px-6 py-2 rounded-lg border border-gold text-black transition">
+                <button data-tab="produk" class="tab-active px-6 py-3 rounded-lg border border-gold text-black transition">
                     <i class="fas fa-box mr-2"></i> Produk
                 </button>
-                <button data-tab="categories" class="px-6 py-2 rounded-lg border border-gray-600 text-gray-400 hover:border-gold hover:text-gold transition">
+                <button data-tab="kategori" class="px-6 py-3 rounded-lg border border-gray-600 text-gray-400 hover:border-gold hover:text-gold transition">
                     <i class="fas fa-folder mr-2"></i> Kategori
+                </button>
+                <button data-tab="setting" class="px-6 py-3 rounded-lg border border-gray-600 text-gray-400 hover:border-gold hover:text-gold transition">
+                    <i class="fas fa-cog mr-2"></i> Tetapan
                 </button>
             </div>
 
-            <!-- PRODUCTS TAB -->
-            <div id="tab-products" class="tab-content">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-bold">📦 Senarai Produk</h2>
-                    <button onclick="openProductModal()" class="bg-green-600 hover:bg-green-700 px-5 py-2 rounded-lg font-bold transition">
-                        <i class="fas fa-plus mr-1"></i> Tambah Produk
+            <!-- ====================================== -->
+            <!-- SECTION A: KAWALAN PRODUK             -->
+            <!-- ====================================== -->
+            <div id="tab-produk" class="tab-content">
+                <div class="bg-darker rounded-xl border border-gray-800 p-6 mb-8">
+                    <h2 class="text-xl font-bold text-gold mb-6">➕ TAMBAH PRODUK BARU</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Nama Produk</label>
+                            <input type="text" id="prodName" class="w-full px-4 py-3 rounded-lg" placeholder="Contoh: 50 Diamond FF">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Harga</label>
+                            <input type="text" id="prodPrice" class="w-full px-4 py-3 rounded-lg" placeholder="Contoh: Rp 10.000">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Kategori</label>
+                            <select id="prodCat" class="w-full px-4 py-3 rounded-lg">
+                                <!-- Auto load dari localStorage -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Link Gambar / Ikon</label>
+                            <input type="text" id="prodImg" class="w-full px-4 py-3 rounded-lg" placeholder="Contoh: 💎 atau URL gambar">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-semibold mb-2">Deskripsi</label>
+                            <input type="text" id="prodDesc" class="w-full px-4 py-3 rounded-lg" placeholder="Contoh: Proses 1-5 Minit">
+                        </div>
+                    </div>
+                    <button onclick="tambahProduk()" class="mt-6 bg-gold text-black font-bold px-8 py-3 rounded-lg hover:bg-yellow-400 transition">
+                        ✅ TAMBAH PRODUK
                     </button>
                 </div>
-                <div id="productsList" class="space-y-3">
-                    <!-- Products list -->
+
+                <!-- FILTER PRODUK -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold mb-2">📂 Filter mengikut Kategori:</label>
+                    <select id="filterProd" onchange="renderProduk()" class="w-full md:w-64 px-4 py-3 rounded-lg">
+                        <option value="all">Semua Kategori</option>
+                    </select>
+                </div>
+
+                <!-- SENARAI PRODUK -->
+                <h3 class="text-lg font-bold mb-4">📦 SENARAI PRODUK (<span id="jumlahProd">0</span>)</h3>
+                <div id="senaraiProduk" class="space-y-3">
+                    <!-- Auto load produk -->
                 </div>
             </div>
 
-            <!-- CATEGORIES TAB -->
-            <div id="tab-categories" class="tab-content hidden">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-bold">📂 Senarai Kategori</h2>
-                    <button onclick="openCategoryModal()" class="bg-green-600 hover:bg-green-700 px-5 py-2 rounded-lg font-bold transition">
-                        <i class="fas fa-plus mr-1"></i> Tambah Kategori
-                    </button>
+            <!-- ====================================== -->
+            <!-- SECTION B: KAWALAN KATEGORI           -->
+            <!-- ====================================== -->
+            <div id="tab-kategori" class="tab-content hidden">
+                <div class="bg-darker rounded-xl border border-gray-800 p-6 mb-8">
+                    <h2 class="text-xl font-bold text-gold mb-6">➕ TAMBAH KATEGORI BARU</h2>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input type="text" id="namaKategori" class="flex-1 px-4 py-3 rounded-lg" placeholder="Contoh: Free Fire">
+                        <button onclick="tambahKategori()" class="bg-gold text-black font-bold px-8 py-3 rounded-lg hover:bg-yellow-400 transition whitespace-nowrap">
+                            ✅ TAMBAH
+                        </button>
+                    </div>
                 </div>
-                <div id="categoriesList" class="space-y-3">
-                    <!-- Categories list -->
+
+                <h3 class="text-lg font-bold mb-4">📂 SENARAI KATEGORI (<span id="jumlahCat">0</span>)</h3>
+                <div id="senaraiKategori" class="space-y-3">
+                    <!-- Auto load kategori -->
+                </div>
+            </div>
+
+            <!-- ====================================== -->
+            <!-- SECTION C: SETTING                    -->
+            <!-- ====================================== -->
+            <div id="tab-setting" class="tab-content hidden">
+                <div class="bg-darker rounded-xl border border-gray-800 p-6 space-y-8 max-w-xl">
+                    <h2 class="text-xl font-bold text-gold">⚙️ TETAPAN KEDAI</h2>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">📞 Nombor WhatsApp Order</label>
+                        <input type="text" id="setWA" class="w-full px-4 py-3 rounded-lg" placeholder="Contoh: 60194939829">
+                        <p class="text-xs text-gray-500 mt-1">Hanya nombor, tanpa tanda +</p>
+                    </div>
+
+                    <hr class="border-gray-700">
+
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">🔐 TUKAR AKUN ADMIN</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Username Baru</label>
+                                <input type="text" id="setUser" class="w-full px-4 py-3 rounded-lg" placeholder="Masukkan username baru">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Password Baru</label>
+                                <input type="password" id="setPass" class="w-full px-4 py-3 rounded-lg" placeholder="Masukkan password baru">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="simpanSetting()" class="bg-gold text-black font-bold px-8 py-3 rounded-lg hover:bg-yellow-400 transition">
+                        💾 SIMPAN SEMUA TETAPAN
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- PRODUCT MODAL -->
-    <div id="productModal" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 modal-backdrop" onclick="closeProductModal()"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-darker rounded-2xl p-6 border border-gray-800 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 id="productModalTitle" class="text-xl font-bold text-gold">Tambah Produk</h3>
-                <button onclick="closeProductModal()" class="text-gray-500 hover:text-white text-2xl">&times;</button>
-            </div>
+    <!-- ====================================== -->
+    <!-- 📝 MODAL EDIT PRODUK                  -->
+    <!-- ====================================== -->
+    <div id="editModal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+        <div class="absolute inset-0 modal-backdrop" onclick="tutupModal()"></div>
+        <div class="relative bg-darker rounded-2xl p-6 w-full max-w-md border border-gray-800">
+            <h3 class="text-xl font-bold text-gold mb-6">✏️ EDIT PRODUK</h3>
+            <input type="hidden" id="editId">
             <div class="space-y-4">
-                <input type="hidden" id="productId">
                 <div>
                     <label class="block text-sm font-semibold mb-2">Nama Produk</label>
-                    <input type="text" id="productName" class="w-full px-4 py-3 rounded-lg bg-dark border border-gray-700 focus:border-gold outline-none">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-2">Kategori</label>
-                    <select id="productCategory" class="w-full px-4 py-3 rounded-lg bg-dark border border-gray-700 focus:border-gold outline-none">
-                        <!-- Options load dynamically -->
-                    </select>
+                    <input type="text" id="editName" class="w-full px-4 py-3 rounded-lg">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold mb-2">Harga</label>
-                    <input type="text" id="productPrice" class="w-full px-4 py-3 rounded-lg bg-dark border border-gray-700 focus:border-gold outline-none" placeholder="Contoh: Rp 10.000">
+                    <input type="text" id="editPrice" class="w-full px-4 py-3 rounded-lg">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Kategori</label>
+                    <select id="editCat" class="w-full px-4 py-3 rounded-lg"></select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Gambar/Ikon</label>
+                    <input type="text" id="editImg" class="w-full px-4 py-3 rounded-lg">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold mb-2">Deskripsi</label>
-                    <input type="text" id="productDesc" class="w-full px-4 py-3 rounded-lg bg-dark border border-gray-700 focus:border-gold outline-none" placeholder="Contoh: Proses 1-5 Minit">
+                    <input type="text" id="editDesc" class="w-full px-4 py-3 rounded-lg">
                 </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-2">Ikon/Emoji</label>
-                    <input type="text" id="productImage" class="w-full px-4 py-3 rounded-lg bg-dark border border-gray-700 focus:border-gold outline-none" placeholder="Contoh: 💎" value="💎">
+                <div class="flex gap-3 pt-2">
+                    <button onclick="tutupModal()" class="flex-1 bg-gray-700 hover:bg-gray-600 py-3 rounded-lg transition">Batal</button>
+                    <button onclick="simpanEdit()" class="flex-1 bg-gold text-black font-bold py-3 rounded-lg hover:bg-yellow-400 transition">Simpan</button>
                 </div>
-                <button onclick="saveProduct()" class="w-full bg-gold text-black font-bold py-3 rounded-lg hover:bg-yellow-400 transition mt-4">
-                    💾 Simpan Produk
-                </button>
             </div>
-        </div>
-    </div>
-
-    <!-- CATEGORY MODAL -->
-    <div id="categoryModal" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 modal-backdrop" onclick="closeCategoryModal()"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-darker rounded-2xl p-6 border border-gray-800">
-            <div class="flex justify-between items-center mb-6">
-                <h3 id="categoryModalTitle" class="text-xl font-bold text-gold">Tambah Kategori</h3>
-                <button onclick="closeCategoryModal()" class="text-gray-500 hover:text-white text-2xl">&times;</button>
-            </div>
-            <input type="hidden" id="categoryId">
-            <div class="mb-6">
-                <label class="block text-sm font-semibold mb-2">Nama Kategori</label>
-                <input type="text" id="categoryName" class="w-full px-4 py-3 rounded-lg bg-dark border border-gray-700 focus:border-gold outline-none" placeholder="Contoh: Free Fire">
-            </div>
-            <button onclick="saveCategory()" class="w-full bg-gold text-black font-bold py-3 rounded-lg hover:bg-yellow-400 transition">
-                💾 Simpan Kategori
-            </button>
         </div>
     </div>
 
     <script>
-        // ========== DEFAULT DATA ==========
+        // ========== DATA DEFAULT ==========
         const DEFAULT_ADMIN = { username: 'admin', password: 'admin123' };
-        const DEFAULT_CATEGORIES = [
-            { id: 1, name: 'Free Fire' },
-            { id: 2, name: 'Mobile Legends' },
-            { id: 3, name: 'Boost Service' }
-        ];
+        const DEFAULT_SETTINGS = { waNumber: '60194939829' };
+        const DEFAULT_CATEGORIES = ['Free Fire', 'Mobile Legends', 'Boost Service'];
         const DEFAULT_PRODUCTS = [
-            { id: 1, category: 'Free Fire', name: '50 Diamond FF', price: 'Rp 10.000', desc: 'Proses 1-5 Minit', image: '💎' },
-            { id: 2, category: 'Free Fire', name: '140 Diamond FF', price: 'Rp 25.000', desc: 'Proses 1-5 Minit', image: '💎' },
-            { id: 3, category: 'Free Fire', name: '355 Diamond FF', price: 'Rp 60.000', desc: 'Proses 1-5 Minit', image: '💎' },
-            { id: 4, category: 'Mobile Legends', name: '86 Diamonds ML', price: 'Rp 20.000', desc: 'Proses 1-5 Minit', image: '💎' },
-            { id: 5, category: 'Mobile Legends', name: '172 Diamonds ML', price: 'Rp 40.000', desc: 'Proses 1-5 Minit', image: '💎' },
-            { id: 6, category: 'Boost Service', name: 'Joki Rank ML Mythic Glory', price: 'Hubungi WA', desc: 'Sila chat untuk harga', image: '🏆' }
+            { id: 1, name: '50 Diamond FF', price: 'Rp 10.000', category: 'Free Fire', image: '💎', desc: 'Proses 1-5 Minit' },
+            { id: 2, name: '140 Diamond FF', price: 'Rp 25.000', category: 'Free Fire', image: '💎', desc: 'Proses 1-5 Minit' },
+            { id: 3, name: '355 Diamond FF', price: 'Rp 60.000', category: 'Free Fire', image: '💎', desc: 'Proses 1-5 Minit' },
+            { id: 4, name: '86 Diamonds ML', price: 'Rp 20.000', category: 'Mobile Legends', image: '💎', desc: 'Proses 1-5 Minit' },
+            { id: 5, name: '172 Diamonds ML', price: 'Rp 40.000', category: 'Mobile Legends', image: '💎', desc: 'Proses 1-5 Minit' },
+            { id: 6, name: 'Joki Rank ML Mythic Glory', price: 'Hubungi WA', category: 'Boost Service', image: '🏆', desc: 'Sila chat untuk harga' }
         ];
 
         // ========== STATE ==========
         let isLoggedIn = false;
+        let admin = JSON.parse(localStorage.getItem('ds_admin')) || DEFAULT_ADMIN;
+        let settings = JSON.parse(localStorage.getItem('ds_settings')) || DEFAULT_SETTINGS;
         let categories = JSON.parse(localStorage.getItem('ds_categories')) || DEFAULT_CATEGORIES;
         let products = JSON.parse(localStorage.getItem('ds_products')) || DEFAULT_PRODUCTS;
 
-        // Save data
-        function saveData() {
+        // ========== SAVE DATA ==========
+        function saveAll() {
+            localStorage.setItem('ds_admin', JSON.stringify(admin));
+            localStorage.setItem('ds_settings', JSON.stringify(settings));
             localStorage.setItem('ds_categories', JSON.stringify(categories));
             localStorage.setItem('ds_products', JSON.stringify(products));
         }
 
-        // Login
+        // ========== LOGIN ==========
         function login() {
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
             
-            if (user === DEFAULT_ADMIN.username && pass === DEFAULT_ADMIN.password) {
+            if (user === admin.username && pass === admin.password) {
                 isLoggedIn = true;
                 document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('adminPanel').classList.remove('hidden');
-                renderAll();
+                document.getElementById('dashboard').classList.remove('hidden');
+                loadSettings();
+                renderSemua();
             } else {
                 alert('❌ Username atau Password salah!');
             }
         }
 
-        // Logout
         function logout() {
             isLoggedIn = false;
             document.getElementById('loginScreen').classList.remove('hidden');
-            document.getElementById('adminPanel').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
         }
 
-        // Tab switching
+        // ========== TABS ==========
         document.querySelectorAll('[data-tab]').forEach(tab => {
             tab.addEventListener('click', () => {
-                // Update tabs
                 document.querySelectorAll('[data-tab]').forEach(btn => {
                     btn.classList.remove('tab-active', 'border-gold', 'text-black');
                     btn.classList.add('border-gray-600', 'text-gray-400');
@@ -224,175 +290,84 @@
                 tab.classList.add('tab-active');
                 tab.classList.remove('border-gray-600', 'text-gray-400');
                 
-                // Show content
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
                 document.getElementById(`tab-${tab.dataset.tab}`).classList.remove('hidden');
             });
         });
 
-        // ========== CATEGORIES ==========
-        function renderCategories() {
-            const list = document.getElementById('categoriesList');
+        // ========== KATEGORI ==========
+        function renderKategori() {
+            const list = document.getElementById('senaraiKategori');
+            document.getElementById('jumlahCat').textContent = categories.length;
             list.innerHTML = '';
             
-            categories.forEach(cat => {
+            categories.forEach((cat, i) => {
                 list.innerHTML += `
                     <div class="bg-darker p-4 rounded-lg border border-gray-800 flex justify-between items-center">
-                        <span class="font-bold">📂 ${cat.name}</span>
-                        <div class="flex gap-2">
-                            <button onclick="editCategory(${cat.id})" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button onclick="deleteCategory(${cat.id})" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">
-                                <i class="fas fa-trash"></i> Hapus
-                            </button>
-                        </div>
+                        <span class="font-bold">📂 ${cat}</span>
+                        <button onclick="hapusKategori(${i})" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
                     </div>
                 `;
             });
         }
 
-        function openCategoryModal() {
-            document.getElementById('categoryModalTitle').textContent = 'Tambah Kategori';
-            document.getElementById('categoryId').value = '';
-            document.getElementById('categoryName').value = '';
-            document.getElementById('categoryModal').classList.remove('hidden');
-        }
-
-        function closeCategoryModal() {
-            document.getElementById('categoryModal').classList.add('hidden');
-        }
-
-        function editCategory(id) {
-            const cat = categories.find(c => c.id === id);
-            if (!cat) return;
-            document.getElementById('categoryModalTitle').textContent = 'Edit Kategori';
-            document.getElementById('categoryId').value = id;
-            document.getElementById('categoryName').value = cat.name;
-            document.getElementById('categoryModal').classList.remove('hidden');
-        }
-
-        function saveCategory() {
-            const name = document.getElementById('categoryName').value.trim();
-            const id = document.getElementById('categoryId').value;
+        function tambahKategori() {
+            const nama = document.getElementById('namaKategori').value.trim();
+            if (!nama) { alert('Nama kategori wajib diisi!'); return; }
+            if (categories.includes(nama)) { alert('Kategori ini sudah ada!'); return; }
             
-            if (!name) { alert('Nama kategori wajib diisi!'); return; }
+            categories.push(nama);
+            saveAll();
+            renderKategori();
+            updateCategorySelects();
+            document.getElementById('namaKategori').value = '';
+        }
 
-            if (id) {
-                // Edit
-                const idx = categories.findIndex(c => c.id === parseInt(id));
-                if (idx !== -1) categories[idx].name = name;
-            } else {
-                // Add new
-                const newId = categories.length > 0 ? Math.max(...categories.map(c => c.id)) + 1 : 1;
-                categories.push({ id: newId, name });
-            }
+        function hapusKategori(index) {
+            if (!confirm('⚠️ Pasti nak hapus kategori ini? Produk dalam kategori ini TIDAK akan dipadam.')) return;
+            categories.splice(index, 1);
+            saveAll();
+            renderKategori();
+            updateCategorySelects();
+        }
+
+        // ========== PRODUK ==========
+        function renderProduk() {
+            const filter = document.getElementById('filterProd').value;
+            let filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
             
-            saveData();
-            renderCategories();
-            updateProductCategoryOptions();
-            closeCategoryModal();
-        }
-
-        function deleteCategory(id) {
-            if (!confirm('Pasti nak hapus kategori ini? Produk dalam kategori ini TIDAK akan dipadam.')) return;
-            categories = categories.filter(c => c.id !== id);
-            saveData();
-            renderCategories();
-            updateProductCategoryOptions();
-        }
-
-        // ========== PRODUCTS ==========
-        function renderProducts() {
-            const list = document.getElementById('productsList');
+            const list = document.getElementById('senaraiProduk');
+            document.getElementById('jumlahProd').textContent = filtered.length;
             list.innerHTML = '';
             
-            products.forEach(p => {
+            filtered.forEach(p => {
                 list.innerHTML += `
-                    <div class="bg-darker p-4 rounded-lg border border-gray-800 flex flex-col md:flex-row md:items-center gap-4">
-                        <div class="text-3xl">${p.image || '💎'}</div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-lg">${p.name}</h4>
-                            <p class="text-gold">${p.price}</p>
-                            <p class="text-sm text-gray-500">${p.category} • ${p.desc}</p>
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="editProduct(${p.id})" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm">
-                                <i class="fas fa-edit"></i> Edit
-                            </button>
-                            <button onclick="deleteProduct(${p.id})" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">
-                                <i class="fas fa-trash"></i> Hapus
-                            </button>
+                    <div class="bg-darker p-4 rounded-lg border border-gray-800">
+                        <div class="flex flex-col md:flex-row md:items-center gap-4">
+                            <div class="text-3xl">${p.image || '💎'}</div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg">${p.name}</h4>
+                                <p class="text-gold font-bold">${p.price}</p>
+                                <p class="text-sm text-gray-500">${p.category} • ${p.desc}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="bukaEdit(${p.id})" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button onclick="hapusProduk(${p.id})" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
             });
         }
 
-        function updateProductCategoryOptions() {
-            const select = document.getElementById('productCategory');
-            select.innerHTML = '';
-            categories.forEach(cat => {
-                select.innerHTML += `<option value="${cat.name}">${cat.name}</option>`;
-            });
-        }
-
-        function openProductModal() {
-            document.getElementById('productModalTitle').textContent = 'Tambah Produk';
-            document.getElementById('productId').value = '';
-            document.getElementById('productName').value = '';
-            document.getElementById('productPrice').value = '';
-            document.getElementById('productDesc').value = 'Proses 1-5 Minit';
-            document.getElementById('productImage').value = '💎';
-            updateProductCategoryOptions();
-            document.getElementById('productModal').classList.remove('hidden');
-        }
-
-        function closeProductModal() {
-            document.getElementById('productModal').classList.add('hidden');
-        }
-
-        function editProduct(id) {
-            const p = products.find(x => x.id === id);
-            if (!p) return;
-            document.getElementById('productModalTitle').textContent = 'Edit Produk';
-            document.getElementById('productId').value = id;
-            document.getElementById('productName').value = p.name;
-            document.getElementById('productPrice').value = p.price;
-            document.getElementById('productDesc').value = p.desc;
-            document.getElementById('productImage').value = p.image || '💎';
-            updateProductCategoryOptions();
-            document.getElementById('productCategory').value = p.category;
-            document.getElementById('productModal').classList.remove('hidden');
-        }
-
-        function saveProduct() {
-            const name = document.getElementById('productName').value.trim();
-            const category = document.getElementById('productCategory').value;
-            const price = document.getElementById('productPrice').value.trim();
-            const desc = document.getElementById('productDesc').value.trim();
-            const image = document.getElementById('productImage').value.trim() || '💎';
-            const id = document.getElementById('productId').value;
-            
-            if (!name || !category || !price) { alert('Nama, Kategori & Harga wajib diisi!'); return; }
-
-            if (id) {
-                // Edit
-                const idx = products.findIndex(x => x.id === parseInt(id));
-                if (idx !== -1) {
-                    products[idx] = { ...products[idx], name, category, price, desc, image };
-                }
-            } else {
-                // Add new
-                const newId = products.length > 0 ? Math.max(...products.map(x => x.id)) + 1 : 1;
-                products.push({ id: newId, name, category, price, desc, image });
-            }
-            
-            saveData();
-            renderProducts();
-            closeProductModal();
-        }
-
-        function deleteProduct(id) {
-            if (!confirm('Pasti nak hapus produk ini?')) return;
-            p
+        function tambahProduk() {
+            const name = document.getElementById('prodName').value.trim();
+            const price = document.getElementById('prodPrice').value.trim();
+            const cat = document.getElementById('prodCat').value;
+            const img = document.getElementById('prodImg').v
